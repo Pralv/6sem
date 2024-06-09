@@ -1,0 +1,55 @@
+2.1.1 Пример реализации генератора чисел ряда Фибоначчи с помощью генератора списка:
+
+def fibonacci_list(n):
+    fib_list = [0, 1]
+    [fib_list.append(fib_list[-1] + fib_list[-2]) for _ in range(2, n)]
+    return fib_list
+
+n = 10
+fibonacci_numbers = fibonacci_list(n)
+print(fibonacci_numbers)
+
+
+2.1.2Пример реализации генератора чисел ряда Фибоначчи с помощью функции и yield:
+
+def fibonacci_generator(n):
+    a, b = 0, 1
+    yield a
+    yield b
+    for _ in range(2, n):
+        a, b = b, a + b
+        yield b
+
+n = 10
+fibonacci_gen = fibonacci_generator(n)
+for num in fibonacci_gen:
+    print(num)
+
+
+2.2 Пример программы, генерирующей уникальные идентификаторы UUID:
+
+import uuid
+
+unique_id = uuid.uuid4()
+print(unique_id)
+
+
+2.3 Пример реализации корутины с использованием принципа блокчейна для генерации и возврата новых блоков, а также возврата истории сгенерированных блоков:
+
+def blockchain_coroutine():
+    blockchain = []
+    
+    while True:
+        data = yield
+        if data == 'get_history':
+            yield blockchain
+        else:
+            blockchain.append(data)
+            yield f'Block added: {data}'
+
+blockchain = blockchain_coroutine()
+next(blockchain)
+
+for i in range(5):
+    print(blockchain.send(i))
+print(blockchain.send('get_history'))
