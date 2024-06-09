@@ -1,0 +1,44 @@
+Для решения квадратного уравнения через вычисление дискриминанта, можно воспользоваться следующим алгоритмом:
+
+1. Пользователь вводит значения коэффициентов a, b, c.
+2. Вычисляем дискриминант по формуле D = b^2 - 4ac.
+3. Если дискриминант D > 0, то уравнение имеет два действительных корня x1 = (-b + sqrt(D)) / 2a и x2 = (-b - sqrt(D)) / 2a.
+4. Если D = 0, то уравнение имеет один корень x = -b / 2a.
+5. Если D < 0, то уравнение не имеет действительных корней.
+
+Программа будет иметь следующий вид:
+
+import math
+
+a = float(input("Введите коэффициент a: "))
+b = float(input("Введите коэффициент b: "))
+c = float(input("Введите коэффициент c: "))
+
+D = b**2 - 4*a*c
+
+if D > 0:
+    x1 = (-b + math.sqrt(D)) / (2*a)
+    x2 = (-b - math.sqrt(D)) / (2*a)
+    print("У уравнения два корня:")
+    print("x1 =", x1)
+    print("x2 =", x2)
+elif D == 0:
+    x = -b / (2*a)
+    print("У уравнения один корень:")
+    print("x =", x)
+else:
+    print("У уравнения нет действительных корней")
+
+
+Для тестирования программы можно воспользоваться библиотекой pytest. Для этого создадим файл test_quadratic_equation.py:
+
+import quadratic_equation
+
+def test_discriminant_greater_than_zero():
+    assert quadratic_equation.solve_quadratic(1, -3, 2) == (2, 1)
+
+def test_discriminant_equal_to_zero():
+    assert quadratic_equation.solve_quadratic(1, -2, 1) == 1
+
+def test_discriminant_less_than_zero():
+    assert quadratic_equation.solve_quadratic(1, 1, 1) == None
